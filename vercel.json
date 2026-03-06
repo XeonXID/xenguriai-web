@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/backend/api/**/*.php": {
-      "runtime": "vercel-php@0.7.5"
+      "runtime": "vercel-php@0.7.1"
     }
   },
   "rewrites": [
@@ -12,6 +12,20 @@
     {
       "source": "/backend/api/(.*)",
       "destination": "/api/backend/api/$1"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-Requested-With" }
+      ]
     }
   ]
 }
